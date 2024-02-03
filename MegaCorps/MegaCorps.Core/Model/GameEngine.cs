@@ -36,7 +36,29 @@ namespace MegaCorps.Core.Model
             FourthPlayerHand = hands[3];
         }
 
+        public void FirstPlayerReady()
+        {
+            throw new NotImplementedException();
+        }
 
+        public void SecondPlayerReady()
+        {
+            throw new NotImplementedException();
+        }
 
+        public void ThirdPlayerReady()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void FourthPlayerReady()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Turn()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

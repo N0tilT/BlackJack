@@ -43,8 +43,9 @@
   <ItemGroup>
     <Compile Include="Model\Cards\AttackCard.cs" />
     <Compile Include="Model\Cards\DefenceCard.cs" />
-    <Compile Include="Model\Cards\DeveloperCart.cs" />
+    <Compile Include="Model\Cards\DeveloperCard.cs" />
     <Compile Include="Model\Cards\GameCard.cs" />
+    <Compile Include="Model\Deck.cs" />
     <Compile Include="Model\Enums\AttackType.cs" />
     <Compile Include="Model\Enums\CardDirection.cs" />
     <Compile Include="Model\Enums\CardState.cs" />

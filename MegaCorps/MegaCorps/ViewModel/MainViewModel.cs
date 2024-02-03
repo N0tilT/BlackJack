@@ -34,6 +34,16 @@ namespace MegaCorps.ViewModel
         public int ThirdPlayerScore { get => _thirdPlayerScore; set { _thirdPlayerScore = value; OnPropertyChanged("ThirdPlayerScore"); } }
         public int FourthPlayerScore { get => _fourthPlayerScore; set { _fourthPlayerScore = value; OnPropertyChanged("FourthPlayerScore"); } }
 
+        private bool _firstPlayerReady;
+        private bool _secondPlayerReady;
+        private bool _thirdPlayerReady ;
+        private bool _fourthPlayerReady;
+
+        public bool FirstPlayerReady { get => _firstPlayerReady; set => _firstPlayerReady = value; }
+        public bool SecondPlayerReady { get => _secondPlayerReady; set => _secondPlayerReady = value; }
+        public bool ThirdPlayerReady { get => _thirdPlayerReady; set => _thirdPlayerReady = value; }
+        public bool FourthPlayerReady { get => _fourthPlayerReady; set => _fourthPlayerReady = value; }
+
         private GameEngine engine;
 
         private int _deckCounter;
@@ -46,8 +56,81 @@ namespace MegaCorps.ViewModel
             ThirdPlayerScore = 0;
             FourthPlayerScore = 0;
 
-            engine = new GameEngine();
+            FirstPlayerReady = false;
+            SecondPlayerReady = false;
+            ThirdPlayerReady = false;
+            FourthPlayerReady = false;
+
+        engine = new GameEngine();
+            RefreshCards();
         }
+
+        private void RefreshCards()
+        {
+            DeckCounter = engine.Deck.UnplayedCards.Count;
+            foreach (var card in engine.FirstPlayerHand)
+            {
+                FirstPlayerCards.Add(new CardViewModel(card,engine));
+            }
+            foreach (var card in engine.SecondPlayerHand)
+            {
+                SecondPlayerCards.Add(new CardViewModel(card, engine));
+            }
+            foreach (var card in engine.ThirdPlayerHand)
+            {
+                ThirdPlayerCards.Add(new CardViewModel(card, engine));
+            }
+            foreach (var card in engine.FourthPlayerHand)
+            {
+                FourthPlayerCards.Add(new CardViewModel(card, engine));
+            }
+        }
+
+        private RelayCommand firstPlayerReadyCommand;
+        public RelayCommand FirstPlayerReadyCommand => firstPlayerReadyCommand ?? (
+            firstPlayerReadyCommand = new RelayCommand(obj =>
+            {
+                FirstPlayerReady = true;
+                if (FirstPlayerReady && SecondPlayerReady && ThirdPlayerReady && FourthPlayerReady)
+                {
+                    engine.Turn();
+                    RefreshCards();
+                }
+            }));
+
+        private RelayCommand secondPlayerReadyCommand;
+        public RelayCommand SecondPlayerReadyCommand => secondPlayerReadyCommand ?? (
+            secondPlayerReadyCommand = new RelayCommand(obj =>
+            {
+                SecondPlayerReady = true;
+                if (FirstPlayerReady && SecondPlayerReady && ThirdPlayerReady && FourthPlayerReady)
+                {
+                    engine.Turn();
+                    RefreshCards();
+                }
+            }));
+        private RelayCommand thirdPlayerReadyCommand;
+        public RelayCommand ThirdPlayerReadyCommand => thirdPlayerReadyCommand ?? (
+            thirdPlayerReadyCommand = new RelayCommand(obj =>
+            {
+                ThirdPlayerReady = true;
+                if (FirstPlayerReady && SecondPlayerReady && ThirdPlayerReady && FourthPlayerReady)
+                {
+                    engine.Turn();
+                    RefreshCards();
+                }
+            }));
+        private RelayCommand fourthPlayerReadyCommand;
+        public RelayCommand FourthPlayerReadyCommand => fourthPlayerReadyCommand ?? (
+            fourthPlayerReadyCommand = new RelayCommand(obj =>
+            {
+                FourthPlayerReady = true;
+                if (FirstPlayerReady && SecondPlayerReady && ThirdPlayerReady && FourthPlayerReady)
+                {
+                    engine.Turn();
+                    RefreshCards();
+                }
+            }));
 
     }
 }
