@@ -51,11 +51,6 @@ namespace MegaCorps.ViewModel
 
         public MainViewModel()
         {
-            FirstPlayerReady = false;
-            SecondPlayerReady = false;
-            ThirdPlayerReady = false;
-            FourthPlayerReady = false;
-
             engine = new GameEngine();
             engine.Deal(6);
             RefreshScores();

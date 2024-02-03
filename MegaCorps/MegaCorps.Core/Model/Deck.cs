@@ -42,8 +42,9 @@ namespace MegaCorps.Core.Model
             }
             Random random = new Random();
             List<List<GameCard>> hands = Enumerable.Range(0, playersCount).Select(i => new List<GameCard>()).ToList();
-            
-            while (UnplayedCards.Count > 0)
+
+            int counter = 0;
+            while (counter < dealCount*playersCount)
             {
                 foreach (var player in hands)
                 {
@@ -51,9 +52,11 @@ namespace MegaCorps.Core.Model
                     UnplayedCards.RemoveAt(UnplayedCards.Count - 1);
                     if (UnplayedCards.Count == 0)
                         break;
+                    counter++;
                 }
             }
             return hands;
         }
+
     }
 }

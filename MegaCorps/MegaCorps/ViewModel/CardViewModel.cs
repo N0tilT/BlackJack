@@ -9,8 +9,10 @@ namespace MegaCorps.ViewModel
     {
         private GameCard _card;
         public GameCard Card { get => _card; set => _card = value; }
+
         private GameEngine _engine;
         public GameEngine Engine { get => _engine; set => _engine = value; }
+
         private int _playerPosition;
         public int PlayerPosition { get => _playerPosition; set => _playerPosition = value; }
 
@@ -18,7 +20,7 @@ namespace MegaCorps.ViewModel
         {
             this.Card = card;
             this.Engine = engine;
-            PlayerPosition = playerPosition;
+            this.PlayerPosition = playerPosition;
         }
 
         private RelayCommand cardClickedCommand;

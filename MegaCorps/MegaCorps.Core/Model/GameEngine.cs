@@ -48,7 +48,7 @@ namespace MegaCorps.Core.Model
 
         public void Turn()
         {
-
+            //В деке пихать из анплеед в плеед сыгранные карты
         }
 
         public void SelectCard(GameCard card, int playerPosition)
@@ -61,7 +61,8 @@ namespace MegaCorps.Core.Model
                     if (FirstPlayerHand[cardIndex].State == CardState.Used)
                     {
                         FirstPlayerHand[cardIndex].State = CardState.Unused;
-                    }else if(FirstPlayerHand[cardIndex].State == CardState.Unused)
+                    }
+                    else if (FirstPlayerHand[cardIndex].State == CardState.Unused)
                     {
                         FirstPlayerHand[cardIndex].State = CardState.Used;
                     }

@@ -32,7 +32,5 @@ namespace MegaCorps
             InitializeComponent();
 
         }
-        public List<GameUser> Users {get; set;}
-        public List<Card> Deck { get; set;}
     }
 }
