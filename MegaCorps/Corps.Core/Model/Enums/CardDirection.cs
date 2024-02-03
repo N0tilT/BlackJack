@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MegaCorps
+namespace Corps.Core.Model.Enums
 {
     public enum CardDirection
     {
-        left, 
-        right,
-        all,
-        allbutnotme
+        Left, 
+        Right,
+        All,
+        Allbutnotme
     }
 }

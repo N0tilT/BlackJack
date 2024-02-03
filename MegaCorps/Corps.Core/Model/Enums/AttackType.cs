@@ -4,13 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MegaCorps
+namespace Corps.Core.Model.Enums
 {
-    public enum CardStance
+    public enum AttackType
     {
-        used,
-        unused,
-        played,
-        unplayed
     }
 }

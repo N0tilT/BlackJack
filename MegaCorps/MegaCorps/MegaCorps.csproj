@@ -55,10 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Cards\DeveloperCart.cs" />
-    <Compile Include="GameUtils\DeckBuilder.cs" />
-    <Compile Include="GameUtils\ScoreHelper.cs" />
-    <Compile Include="GameUtils\UserSetup.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
     <Page Include="Card.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -71,17 +68,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Cards\DefenceCard.cs" />
-    <Compile Include="Enums\AttackType.cs" />
     <Compile Include="Card.xaml.cs">
       <DependentUpon>Card.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Enums\CardDirection.cs" />
-    <Compile Include="Enums\CardStance.cs" />
-    <Compile Include="Cards\AttackCard.cs" />
-    <Compile Include="Enums\DefenceType.cs" />
-    <Compile Include="GameUser.cs" />
-    <Compile Include="Cards\GameCard.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -113,6 +102,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\MegaCorps.Core\MegaCorps.Core.csproj">
+      <Project>{8d41c7aa-354e-47b4-8ec8-5f84b8628449}</Project>
+      <Name>MegaCorps.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

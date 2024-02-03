@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MegaCorps.SetupHelper
+namespace MegaCorps.Core.Model.GameUtils
 {
     public static  class UserSetup
     {

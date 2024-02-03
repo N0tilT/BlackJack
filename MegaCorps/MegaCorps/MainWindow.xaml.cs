@@ -1,4 +1,5 @@
 ﻿using MegaCorps.SetupHelper;
+using MegaCorps.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,18 +22,14 @@ namespace MegaCorps
     /// </summary>
     public partial class MainWindow : Window
     {
+        MainViewModel viewModel;
         public MainWindow()
         {
             InitializeComponent();
-            List<GameUser> Users = UserSetup.CreateUserList(2);
-            foreach(var user in Users)
-            {
+                
+            viewModel = new MainViewModel();
 
-            }
-            for (int i = 0; i < 6; i++)
-            {
-                CardList.Children.Add(new Card());
-            }
+            
         }
         public List<GameUser> Users {get; set;}
         public List<Card> Deck { get; set;}

@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MegaCorps
+namespace Corps.Core.Model
 {
-    public enum DefenceType
+    public class GameEngine
     {
+        public GameEngine() 
+        {
+
+        }
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MegaCorps
+namespace Corps.Core.Model
 {
-    public  class GameUser
+    public class GameUser
     {
         public int ID { get; set; }
         public int NextId { get; set; }

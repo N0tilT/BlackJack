@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MegaCorps.GameUtils
+namespace MegaCorps.Core.Model
 {
-    public class ScoreHelper
+    public class GameEngine
     {
+        public GameEngine() 
+        {
 
+        }
     }
 }
