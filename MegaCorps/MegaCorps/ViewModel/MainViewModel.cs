@@ -34,13 +34,19 @@ namespace MegaCorps.ViewModel
         public int ThirdPlayerScore { get => _thirdPlayerScore; set { _thirdPlayerScore = value; OnPropertyChanged("ThirdPlayerScore"); } }
         public int FourthPlayerScore { get => _fourthPlayerScore; set { _fourthPlayerScore = value; OnPropertyChanged("FourthPlayerScore"); } }
 
+        private GameEngine engine;
 
         private int _deckCounter;
         public int DeckCounter { get => _deckCounter; set { _deckCounter = value; OnPropertyChanged("DeckCounter"); } }
 
         MainViewModel()
         {
+            FirstPlayerScore = 0;
+            SecondPlayerScore = 0;
+            ThirdPlayerScore = 0;
+            FourthPlayerScore = 0;
 
+            engine = new GameEngine();
         }
 
     }

@@ -1,4 +1,5 @@
 ﻿using MegaCorps.Core.Model.Cards;
+using MegaCorps.Core.Model.Enums;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,10 +16,27 @@ namespace MegaCorps.Core.Model.GameUtils
         {
            
         }
-        public static  List<GameCard> GetDeck()
+        public static Deck GetDeck()
         {
-            var Deck= new List<GameCard>();
-            return Deck;
+            var deck= new List<GameCard>();
+
+            for (int i = 0; i < 72; i++)
+            {
+                if (i < 20)
+                {
+                    deck.Add(new AttackCard(i,CardDirection.Left));
+                }
+                else if (i < 40)
+                {
+                    deck.Add(new DefenceCard(i));
+                }
+                else
+                {
+                    deck.Add(new DeveloperCard(i));
+                }
+            }
+
+            return new Deck(deck);
         }
 
     }
