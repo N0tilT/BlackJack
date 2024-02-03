@@ -24,6 +24,10 @@
 
         <!--  FIRST PLAYER  -->
         <Grid Grid.Row="2" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
             <Label
                 Grid.Row="0"
                 Content="Игрок1:"
@@ -47,7 +51,10 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Button Command="{Binding CardClickedCommand}">
-                                <Border BorderThickness="3">
+                                <Border
+                                    Name="CardBackground"
+                                    Background="Transparent"
+                                    BorderThickness="5">
                                     <Rectangle Name="CellImage" Fill="{Binding Card.Color}" />
                                 </Border>
                                 <Button.Template>
@@ -56,6 +63,14 @@
                                     </ControlTemplate>
                                 </Button.Template>
                             </Button>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding Card.State}" Value="Used">
+                                    <Setter TargetName="CardBackground" Property="Background" Value="#FFFFFF" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Card.State}" Value="Unused">
+                                    <Setter TargetName="CardBackground" Property="Background" Value="Transparent" />
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
@@ -64,6 +79,10 @@
 
         <!--  SECOND PLAYER  -->
         <Grid Grid.Row="2" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
             <Label
                 Grid.Row="0"
                 Content="Игрок2:"
@@ -87,7 +106,10 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Button Command="{Binding CardClickedCommand}">
-                                <Border BorderThickness="3">
+                                <Border
+                                    Name="CardBackground"
+                                    Background="Transparent"
+                                    BorderThickness="5">
                                     <Rectangle Name="CellImage" Fill="{Binding Card.Color}" />
                                 </Border>
                                 <Button.Template>
@@ -96,6 +118,14 @@
                                     </ControlTemplate>
                                 </Button.Template>
                             </Button>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding Card.State}" Value="Used">
+                                    <Setter TargetName="CardBackground" Property="Background" Value="#FFFFFF" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Card.State}" Value="Unused">
+                                    <Setter TargetName="CardBackground" Property="Background" Value="Transparent" />
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
@@ -103,6 +133,10 @@
         </Grid>
         <!--  THIRD PLAYER  -->
         <Grid Grid.Row="0" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
             <Label
                 Grid.Row="0"
                 Content="Игрок3:"
@@ -126,7 +160,10 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Button Command="{Binding CardClickedCommand}">
-                                <Border BorderThickness="3">
+                                <Border
+                                    Name="CardBackground"
+                                    Background="Transparent"
+                                    BorderThickness="5">
                                     <Rectangle Name="CellImage" Fill="{Binding Card.Color}" />
                                 </Border>
                                 <Button.Template>
@@ -135,6 +172,14 @@
                                     </ControlTemplate>
                                 </Button.Template>
                             </Button>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding Card.State}" Value="Used">
+                                    <Setter TargetName="CardBackground" Property="Background" Value="#FFFFFF" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Card.State}" Value="Unused">
+                                    <Setter TargetName="CardBackground" Property="Background" Value="Transparent" />
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
@@ -142,6 +187,10 @@
         </Grid>
         <!--  FOURTH PLAYER  -->
         <Grid Grid.Row="0" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
             <Label
                 Grid.Row="0"
                 Content="Игрок4:"
@@ -168,7 +217,7 @@
                                 <Border
                                     Name="CardBackground"
                                     Background="Transparent"
-                                    BorderThickness="3">
+                                    BorderThickness="5">
                                     <Rectangle Name="CardImage" Fill="{Binding Card.Color}" />
                                 </Border>
                                 <Button.Template>
@@ -178,10 +227,10 @@
                                 </Button.Template>
                             </Button>
                             <DataTemplate.Triggers>
-                                <DataTrigger Binding="{Binding Cell.State}" Value="Used">
+                                <DataTrigger Binding="{Binding Card.State}" Value="Used">
                                     <Setter TargetName="CardBackground" Property="Background" Value="#FFFFFF" />
                                 </DataTrigger>
-                                <DataTrigger Binding="{Binding Cell.State}" Value="Unused">
+                                <DataTrigger Binding="{Binding Card.State}" Value="Unused">
                                     <Setter TargetName="CardBackground" Property="Background" Value="Transparent" />
                                 </DataTrigger>
                             </DataTemplate.Triggers>
@@ -207,6 +256,10 @@
                 Grid.Column="1"
                 Width="150"
                 Height="150">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
                 <Label
                     Grid.Row="0"
                     Content="Карт в колоде:"

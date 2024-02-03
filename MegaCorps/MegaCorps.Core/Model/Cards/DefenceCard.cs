@@ -9,10 +9,9 @@ namespace MegaCorps.Core.Model.Cards
 {
     public class DefenceCard:GameCard
     {
-        public DefenceType Type;
-        public DefenceCard(DefenceType type,int id): base(id)
+        public DefenceCard(int id): base(id)
         {
-            Type=type;  
+            Color = "Green";
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using MegaCorps.SetupHelper;
+﻿using MegaCorps.Core.Model;
 using MegaCorps.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -25,13 +25,12 @@ namespace MegaCorps
         MainViewModel viewModel;
         public MainWindow()
         {
-            InitializeComponent();
                 
             viewModel = new MainViewModel();
+            DataContext = viewModel;
 
-            
+            InitializeComponent();
+
         }
-        public List<GameUser> Users {get; set;}
-        public List<Card> Deck { get; set;}
     }
 }
