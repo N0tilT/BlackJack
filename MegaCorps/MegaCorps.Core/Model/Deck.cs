@@ -41,7 +41,7 @@ namespace MegaCorps.Core.Model
                 PlayedCards = new List<GameCard>();
             }
             Random random = new Random();
-            List<List<GameCard>> hands = (List<List<GameCard>>)Enumerable.Range(0, playersCount).Select(i => new List<GameCard>());
+            List<List<GameCard>> hands = Enumerable.Range(0, playersCount).Select(i => new List<GameCard>()).ToList();
             
             while (UnplayedCards.Count > 0)
             {

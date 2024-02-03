@@ -14,16 +14,16 @@ namespace MegaCorps.ViewModel
     public class MainViewModel : ObservableObject
     {
         private ObservableCollection<CardViewModel> _firstPlayerCards = new ObservableCollection<CardViewModel>();
-        internal ObservableCollection<CardViewModel> FirstPlayerCards { get => _firstPlayerCards; set { _firstPlayerCards = value; OnPropertyChanged("FirstPlayerCards"); } }
+        public ObservableCollection<CardViewModel> FirstPlayerCards { get => _firstPlayerCards; set { _firstPlayerCards = value; OnPropertyChanged("FirstPlayerCards"); } }
 
         private ObservableCollection<CardViewModel> _secondPlayerCards = new ObservableCollection<CardViewModel>();
-        internal ObservableCollection<CardViewModel> SecondPlayerCards { get => _secondPlayerCards; set { _secondPlayerCards = value; OnPropertyChanged("SecondPlayerCards"); } }
+        public ObservableCollection<CardViewModel> SecondPlayerCards { get => _secondPlayerCards; set { _secondPlayerCards = value; OnPropertyChanged("SecondPlayerCards"); } }
 
         private ObservableCollection<CardViewModel> _thirdPlayerCards = new ObservableCollection<CardViewModel>();
-        internal ObservableCollection<CardViewModel> ThirdPlayerCards { get => _thirdPlayerCards; set { _thirdPlayerCards = value; OnPropertyChanged("ThirdPlayerCards"); } }
+        public ObservableCollection<CardViewModel> ThirdPlayerCards { get => _thirdPlayerCards; set { _thirdPlayerCards = value; OnPropertyChanged("ThirdPlayerCards"); } }
 
         private ObservableCollection<CardViewModel> _fourthPlayerCards = new ObservableCollection<CardViewModel>();
-        internal ObservableCollection<CardViewModel> FourthPlayerCards { get => _fourthPlayerCards; set { _fourthPlayerCards = value; OnPropertyChanged("FourthPlayerCards"); } }
+        public ObservableCollection<CardViewModel> FourthPlayerCards { get => _fourthPlayerCards; set { _fourthPlayerCards = value; OnPropertyChanged("FourthPlayerCards"); } }
 
         private int _firstPlayerScore;
         private int _secondPlayerScore;
@@ -57,6 +57,7 @@ namespace MegaCorps.ViewModel
             FourthPlayerReady = false;
 
             engine = new GameEngine();
+            engine.Deal(6);
             RefreshScores();
             RefreshCards();
         }
@@ -102,6 +103,7 @@ namespace MegaCorps.ViewModel
                 if (FirstPlayerReady && SecondPlayerReady && ThirdPlayerReady && FourthPlayerReady)
                 {
                     engine.Turn();
+                    engine.Deal(3);
                     RefreshCards();
                 }
             }));
@@ -114,6 +116,7 @@ namespace MegaCorps.ViewModel
                 if (FirstPlayerReady && SecondPlayerReady && ThirdPlayerReady && FourthPlayerReady)
                 {
                     engine.Turn();
+                    engine.Deal(3);
                     RefreshCards();
                 }
             }));
@@ -125,6 +128,7 @@ namespace MegaCorps.ViewModel
                 if (FirstPlayerReady && SecondPlayerReady && ThirdPlayerReady && FourthPlayerReady)
                 {
                     engine.Turn();
+                    engine.Deal(3);
                     RefreshCards();
                 }
             }));
@@ -136,6 +140,7 @@ namespace MegaCorps.ViewModel
                 if (FirstPlayerReady && SecondPlayerReady && ThirdPlayerReady && FourthPlayerReady)
                 {
                     engine.Turn();
+                    engine.Deal(3);
                     RefreshCards();
                 }
             }));

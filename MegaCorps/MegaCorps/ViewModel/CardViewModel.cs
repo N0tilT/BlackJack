@@ -5,7 +5,7 @@ using MegaCorps.Core.Model.Enums;
 
 namespace MegaCorps.ViewModel
 {
-    internal class CardViewModel
+    public class CardViewModel
     {
         private GameCard _card;
         public GameCard Card { get => _card; set => _card = value; }
