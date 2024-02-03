@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace MegaCorps.Core.Model.Cards
 {
-    public class DeveloperCard:GameCard
+    public class DeveloperCard : GameCard
     {
-       public int DevelopmentPoint { get; set; }
-        public DeveloperCard(int id):base(id)
+        public int DevelopmentPoint { get; set; }
+        public DeveloperCard(int id) : base(id)
         {
-                DevelopmentPoint = 1;
+            DevelopmentPoint = 1;
+            Color = "Yellow";
         }
     }
 }

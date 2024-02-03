@@ -15,6 +15,7 @@ namespace MegaCorps.Core.Model.Cards
         {
             Direction = direction;
             Damage = 1;
+            Color = "Red";
         }
         
 

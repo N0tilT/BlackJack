@@ -49,20 +49,24 @@ namespace MegaCorps.ViewModel
         private int _deckCounter;
         public int DeckCounter { get => _deckCounter; set { _deckCounter = value; OnPropertyChanged("DeckCounter"); } }
 
-        MainViewModel()
+        public MainViewModel()
         {
-            FirstPlayerScore = 0;
-            SecondPlayerScore = 0;
-            ThirdPlayerScore = 0;
-            FourthPlayerScore = 0;
-
             FirstPlayerReady = false;
             SecondPlayerReady = false;
             ThirdPlayerReady = false;
             FourthPlayerReady = false;
 
-        engine = new GameEngine();
+            engine = new GameEngine();
+            RefreshScores();
             RefreshCards();
+        }
+
+        private void RefreshScores()
+        {
+            FirstPlayerScore = engine.FirstPlayerScore;
+            SecondPlayerScore = engine.SecondPlayerScore;
+            ThirdPlayerScore = engine.ThirdPlayerScore;
+            FourthPlayerScore = engine.FourthPlayerScore;
         }
 
         private void RefreshCards()
@@ -70,20 +74,24 @@ namespace MegaCorps.ViewModel
             DeckCounter = engine.Deck.UnplayedCards.Count;
             foreach (var card in engine.FirstPlayerHand)
             {
-                FirstPlayerCards.Add(new CardViewModel(card,engine));
+                FirstPlayerCards.Add(new CardViewModel(card,0,engine));
             }
             foreach (var card in engine.SecondPlayerHand)
             {
-                SecondPlayerCards.Add(new CardViewModel(card, engine));
+                SecondPlayerCards.Add(new CardViewModel(card, 1, engine));
             }
             foreach (var card in engine.ThirdPlayerHand)
             {
-                ThirdPlayerCards.Add(new CardViewModel(card, engine));
+                ThirdPlayerCards.Add(new CardViewModel(card, 2, engine));
             }
             foreach (var card in engine.FourthPlayerHand)
             {
-                FourthPlayerCards.Add(new CardViewModel(card, engine));
+                FourthPlayerCards.Add(new CardViewModel(card, 3, engine));
             }
+            FirstPlayerReady = false;
+            SecondPlayerReady = false;
+            ThirdPlayerReady = false;
+            FourthPlayerReady = false;
         }
 
         private RelayCommand firstPlayerReadyCommand;

@@ -11,6 +11,7 @@ namespace MegaCorps.Core.Model.Cards
     {
         public DefenceCard(int id): base(id)
         {
+            Color = "Green";
         }
     }
 }

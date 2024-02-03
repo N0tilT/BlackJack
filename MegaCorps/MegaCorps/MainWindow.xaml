@@ -178,10 +178,10 @@
                                 </Button.Template>
                             </Button>
                             <DataTemplate.Triggers>
-                                <DataTrigger Binding="{Binding Cell.State}" Value="Used">
+                                <DataTrigger Binding="{Binding Card.State}" Value="Used">
                                     <Setter TargetName="CardBackground" Property="Background" Value="#FFFFFF" />
                                 </DataTrigger>
-                                <DataTrigger Binding="{Binding Cell.State}" Value="Unused">
+                                <DataTrigger Binding="{Binding Card.State}" Value="Unused">
                                     <Setter TargetName="CardBackground" Property="Background" Value="Transparent" />
                                 </DataTrigger>
                             </DataTemplate.Triggers>
