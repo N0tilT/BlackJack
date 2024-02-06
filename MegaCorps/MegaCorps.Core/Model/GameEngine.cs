@@ -38,24 +38,30 @@ namespace MegaCorps.Core.Model
 
         public void Turn()
         {
-
+            for (int i = 0; i < Players.Count; i++)
+            {
+                Players[i].Targeted = Players[i == 0 ? Players.Count() - 1 : i + 1].Hand.Cards.Where((card) => card.State == CardState.Used && card.Color == "Red").ToList();
+                Players[i].PlayHand();
+            }
+            for (int i = 0; i < Players.Count; i++)
+            {
+                Deck.PlayedCards.AddRange(Players[i].Hand.Cards.Where((card) => card.State == CardState.Used));
+                Players[i].Hand.Cards.RemoveAll((card) => card.State == CardState.Used);
+                Players[i].Targeted.Clear();
+            }
 
         }
 
         public void SelectCard(GameCard card, int playerPosition)
         {
-            int cardIndex;
-            for (int i = 0; i < Players.Count; i++)
+            int cardIndex = Players[playerPosition].Hand.Cards.FindIndex((element) => element.Id == card.Id);
+            if (Players[playerPosition].Hand.Cards[cardIndex].State == CardState.Used)
             {
-                cardIndex = Players[i].Hand.Cards.FindIndex((element) => element.Id == card.Id);
-                if (Players[i].Hand.Cards[cardIndex].State == CardState.Used)
-                {
-                    Players[i].Hand.Cards[cardIndex].State = CardState.Unused;
-                }
-                else if (Players[i].Hand.Cards[cardIndex].State == CardState.Unused)
-                {
-                    Players[i].Hand.Cards[cardIndex].State = CardState.Used;
-                }
+                Players[playerPosition].Hand.Cards[cardIndex].State = CardState.Unused;
+            }
+            else if (Players[playerPosition].Hand.Cards[cardIndex].State == CardState.Unused)
+            {
+                Players[playerPosition].Hand.Cards[cardIndex].State = CardState.Used;
             }
         }
     }

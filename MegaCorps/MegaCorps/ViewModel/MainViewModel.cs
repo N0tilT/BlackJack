@@ -59,28 +59,28 @@ namespace MegaCorps.ViewModel
 
         private void RefreshScores()
         {
-            FirstPlayerScore = engine.FirstPlayerScore;
-            SecondPlayerScore = engine.SecondPlayerScore;
-            ThirdPlayerScore = engine.ThirdPlayerScore;
-            FourthPlayerScore = engine.FourthPlayerScore;
+            FirstPlayerScore = engine.Players[0].Score;
+            SecondPlayerScore = engine.Players[1].Score;
+            ThirdPlayerScore = engine.Players[2].Score;
+            FourthPlayerScore = engine.Players[3].Score;
         }
 
         private void RefreshCards()
         {
             DeckCounter = engine.Deck.UnplayedCards.Count;
-            foreach (var card in engine.FirstPlayerHand)
+            foreach (var card in engine.Players[0].Hand.Cards)
             {
                 FirstPlayerCards.Add(new CardViewModel(card,0,engine));
             }
-            foreach (var card in engine.SecondPlayerHand)
+            foreach (var card in engine.Players[1].Hand.Cards)
             {
                 SecondPlayerCards.Add(new CardViewModel(card, 1, engine));
             }
-            foreach (var card in engine.ThirdPlayerHand)
+            foreach (var card in engine.Players[2].Hand.Cards)
             {
                 ThirdPlayerCards.Add(new CardViewModel(card, 2, engine));
             }
-            foreach (var card in engine.FourthPlayerHand)
+            foreach (var card in engine.Players[3].Hand.Cards)
             {
                 FourthPlayerCards.Add(new CardViewModel(card, 3, engine));
             }

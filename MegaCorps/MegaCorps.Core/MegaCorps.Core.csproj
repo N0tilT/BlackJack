@@ -55,6 +55,7 @@
     <Compile Include="Model\GameUtils\DeckBuilder.cs" />
     <Compile Include="Model\GameUtils\ScoreHelper.cs" />
     <Compile Include="Model\GameUtils\UserSetup.cs" />
+    <Compile Include="Model\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
