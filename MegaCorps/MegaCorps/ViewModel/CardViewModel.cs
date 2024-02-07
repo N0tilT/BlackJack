@@ -5,10 +5,18 @@ using MegaCorps.Core.Model.Enums;
 
 namespace MegaCorps.ViewModel
 {
-    public class CardViewModel
+    public class CardViewModel : ObservableObject
     {
         private GameCard _card;
-        public GameCard Card { get => _card; set => _card = value; }
+        public GameCard Card
+        {
+            get => _card;
+            set
+            {
+                _card = value;
+                OnPropertyChanged("Card");
+            }
+        }
 
         private GameEngine _engine;
         public GameEngine Engine { get => _engine; set => _engine = value; }
@@ -27,15 +35,21 @@ namespace MegaCorps.ViewModel
         public RelayCommand CardClickedCommand => cardClickedCommand ?? (
             cardClickedCommand = new RelayCommand(obj =>
             {
-                if(Card.State == CardState.Used)
+                if (Card.State == CardState.Unused)
+                {
+                    if (Engine.Players[PlayerPosition].Selected.Count < 3)
+                    {
+                        Card.State = CardState.Used;
+                        Engine.Players[PlayerPosition].Selected.Enqueue(Card);
+                    }
+                }
+
+                else if (Card.State == CardState.Used)
                 {
                     Card.State = CardState.Unused;
+                    Engine.Players[PlayerPosition].Selected.Dequeue();
                 }
-                else if(Card.State == CardState.Unused)
-                {
-                    Card.State = CardState.Used;
-                }
-                Engine.SelectCard(Card,PlayerPosition);
+                OnPropertyChanged(nameof(Card));
             }));
 
     }

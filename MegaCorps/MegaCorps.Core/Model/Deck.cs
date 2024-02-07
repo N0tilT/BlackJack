@@ -35,9 +35,13 @@ namespace MegaCorps.Core.Model
 
         public List<List<GameCard>> Deal(int dealCount, int playersCount)
         {
-            if(UnplayedCards.Count < dealCount * playersCount)
+            if(UnplayedCards.Count <= dealCount * playersCount)
             {
-                UnplayedCards = new List<GameCard>(PlayedCards);
+                foreach (GameCard card in PlayedCards)
+                {
+                    card.State = Enums.CardState.Unused;
+                }
+                UnplayedCards = new List<GameCard>();
                 PlayedCards = new List<GameCard>();
             }
             Random random = new Random();

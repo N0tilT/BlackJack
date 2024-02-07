@@ -18,7 +18,7 @@ namespace MegaCorps.Core.Model.Cards
         {
             Id=id;
             UserId=-1;
-            State= CardState.Unplayed;
+            State= CardState.Unused;
         }
 
     }

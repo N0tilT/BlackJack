@@ -39,10 +39,11 @@
         </Grid>
         <Grid Grid.Row="2" Grid.Column="1">
             <Border
+                x:Name="FirstPlayerCardContainerBorder"
                 Background="#b5aebf"
                 BorderThickness="3"
                 CornerRadius="6">
-                <ItemsControl ItemsSource="{Binding FirstPlayerCards}">
+                <ItemsControl x:Name="FirstPlayerCardContainer" ItemsSource="{Binding FirstPlayerCards}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Columns="6" />
@@ -53,7 +54,7 @@
                             <Button Command="{Binding CardClickedCommand}">
                                 <Border
                                     Name="CardBackground"
-                                    Background="Transparent"
+                                    BorderBrush="Transparent"
                                     BorderThickness="5">
                                     <Rectangle Name="CellImage" Fill="{Binding Card.Color}" />
                                 </Border>
@@ -65,10 +66,10 @@
                             </Button>
                             <DataTemplate.Triggers>
                                 <DataTrigger Binding="{Binding Card.State}" Value="Used">
-                                    <Setter TargetName="CardBackground" Property="Background" Value="#FFFFFF" />
+                                    <Setter TargetName="CardBackground" Property="BorderBrush" Value="Purple" />
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding Card.State}" Value="Unused">
-                                    <Setter TargetName="CardBackground" Property="Background" Value="Transparent" />
+                                    <Setter TargetName="CardBackground" Property="BorderBrush" Value="Transparent" />
                                 </DataTrigger>
                             </DataTemplate.Triggers>
                         </DataTemplate>
@@ -94,10 +95,11 @@
         </Grid>
         <Grid Grid.Row="1" Grid.Column="0">
             <Border
+                x:Name="SecondPlayerCardContainerBorder"
                 Background="#b5aebf"
                 BorderThickness="3"
                 CornerRadius="6">
-                <ItemsControl ItemsSource="{Binding SecondPlayerCards}">
+                <ItemsControl x:Name="SecondPlayerCardContainer" ItemsSource="{Binding SecondPlayerCards}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Rows="6" />
@@ -107,8 +109,8 @@
                         <DataTemplate>
                             <Button Command="{Binding CardClickedCommand}">
                                 <Border
-                                    Name="CardBackground"
-                                    Background="Transparent"
+                                    x:Name="CardBackground"
+                                    BorderBrush="Transparent"
                                     BorderThickness="5">
                                     <Rectangle Name="CellImage" Fill="{Binding Card.Color}" />
                                 </Border>
@@ -120,10 +122,10 @@
                             </Button>
                             <DataTemplate.Triggers>
                                 <DataTrigger Binding="{Binding Card.State}" Value="Used">
-                                    <Setter TargetName="CardBackground" Property="Background" Value="#FFFFFF" />
+                                    <Setter TargetName="CardBackground" Property="BorderBrush" Value="Purple" />
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding Card.State}" Value="Unused">
-                                    <Setter TargetName="CardBackground" Property="Background" Value="Transparent" />
+                                    <Setter TargetName="CardBackground" Property="BorderBrush" Value="Transparent" />
                                 </DataTrigger>
                             </DataTemplate.Triggers>
                         </DataTemplate>
@@ -148,10 +150,11 @@
         </Grid>
         <Grid Grid.Row="0" Grid.Column="1">
             <Border
+                x:Name="ThirdPlayerCardContainerBorder"
                 Background="#b5aebf"
                 BorderThickness="3"
                 CornerRadius="6">
-                <ItemsControl ItemsSource="{Binding ThirdPlayerCards}">
+                <ItemsControl x:Name="ThirdPlayerCardContainer" ItemsSource="{Binding ThirdPlayerCards}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Columns="6" />
@@ -162,7 +165,7 @@
                             <Button Command="{Binding CardClickedCommand}">
                                 <Border
                                     Name="CardBackground"
-                                    Background="Transparent"
+                                    BorderBrush="Transparent"
                                     BorderThickness="5">
                                     <Rectangle Name="CellImage" Fill="{Binding Card.Color}" />
                                 </Border>
@@ -174,10 +177,10 @@
                             </Button>
                             <DataTemplate.Triggers>
                                 <DataTrigger Binding="{Binding Card.State}" Value="Used">
-                                    <Setter TargetName="CardBackground" Property="Background" Value="#FFFFFF" />
+                                    <Setter TargetName="CardBackground" Property="BorderBrush" Value="Purple" />
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding Card.State}" Value="Unused">
-                                    <Setter TargetName="CardBackground" Property="Background" Value="Transparent" />
+                                    <Setter TargetName="CardBackground" Property="BorderBrush" Value="Transparent" />
                                 </DataTrigger>
                             </DataTemplate.Triggers>
                         </DataTemplate>
@@ -202,10 +205,11 @@
         </Grid>
         <Grid Grid.Row="1" Grid.Column="2">
             <Border
+                x:Name="FourthPlayerCardContainerBorder"
                 Background="#b5aebf"
                 BorderThickness="3"
                 CornerRadius="6">
-                <ItemsControl ItemsSource="{Binding FourthPlayerCards}">
+                <ItemsControl x:Name="FourthPlayerCardContainer" ItemsSource="{Binding FourthPlayerCards}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Rows="6" />
@@ -216,7 +220,7 @@
                             <Button Command="{Binding CardClickedCommand}">
                                 <Border
                                     Name="CardBackground"
-                                    Background="Transparent"
+                                    BorderBrush="Transparent"
                                     BorderThickness="5">
                                     <Rectangle Name="CardImage" Fill="{Binding Card.Color}" />
                                 </Border>
@@ -228,10 +232,10 @@
                             </Button>
                             <DataTemplate.Triggers>
                                 <DataTrigger Binding="{Binding Card.State}" Value="Used">
-                                    <Setter TargetName="CardBackground" Property="Background" Value="#FFFFFF" />
+                                    <Setter TargetName="CardBackground" Property="BorderBrush" Value="Purple" />
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding Card.State}" Value="Unused">
-                                    <Setter TargetName="CardBackground" Property="Background" Value="Transparent" />
+                                    <Setter TargetName="CardBackground" Property="BorderBrush" Value="Transparent" />
                                 </DataTrigger>
                             </DataTemplate.Triggers>
                         </DataTemplate>
@@ -276,6 +280,7 @@
                 Width="70"
                 Height="40"
                 Background="Green"
+                Click="FirstPlayerReady_Click"
                 Command="{Binding FirstPlayerReadyCommand}"
                 Content="Готов" />
             <Button
@@ -284,6 +289,7 @@
                 Width="40"
                 Height="70"
                 Background="Green"
+                Click="SecondPlayerReady_Click"
                 Command="{Binding SecondPlayerReadyCommand}"
                 Content="Готов" />
             <Button
@@ -292,6 +298,7 @@
                 Width="70"
                 Height="40"
                 Background="Green"
+                Click="ThirdPlayerReady_Click"
                 Command="{Binding ThirdPlayerReadyCommand}"
                 Content="Готов" />
             <Button
@@ -300,6 +307,7 @@
                 Width="40"
                 Height="70"
                 Background="Green"
+                Click="FourthPlayerReady_Click"
                 Command="{Binding FourthPlayerReadyCommand}"
                 Content="Готов" />
         </Grid>

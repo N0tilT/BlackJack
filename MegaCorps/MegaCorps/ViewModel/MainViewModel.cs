@@ -1,6 +1,7 @@
 ﻿using MegaCorps.Core;
 using MegaCorps.Core.Model;
 using MegaCorps.Core.Model.Cards;
+using MegaCorps.Core.Model.Enums;
 using MegaCorps.Core.Model.GameUtils;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace MegaCorps.ViewModel
 {
@@ -36,7 +38,7 @@ namespace MegaCorps.ViewModel
 
         private bool _firstPlayerReady;
         private bool _secondPlayerReady;
-        private bool _thirdPlayerReady ;
+        private bool _thirdPlayerReady;
         private bool _fourthPlayerReady;
 
         public bool FirstPlayerReady { get => _firstPlayerReady; set => _firstPlayerReady = value; }
@@ -65,25 +67,14 @@ namespace MegaCorps.ViewModel
             FourthPlayerScore = engine.Players[3].Score;
         }
 
-        private void RefreshCards()
+        public void RefreshCards()
         {
             DeckCounter = engine.Deck.UnplayedCards.Count;
-            foreach (var card in engine.Players[0].Hand.Cards)
-            {
-                FirstPlayerCards.Add(new CardViewModel(card,0,engine));
-            }
-            foreach (var card in engine.Players[1].Hand.Cards)
-            {
-                SecondPlayerCards.Add(new CardViewModel(card, 1, engine));
-            }
-            foreach (var card in engine.Players[2].Hand.Cards)
-            {
-                ThirdPlayerCards.Add(new CardViewModel(card, 2, engine));
-            }
-            foreach (var card in engine.Players[3].Hand.Cards)
-            {
-                FourthPlayerCards.Add(new CardViewModel(card, 3, engine));
-            }
+            FirstPlayerCards = new ObservableCollection<CardViewModel>(engine.Players[0].Hand.Cards.Select(card => new CardViewModel(card, 0, engine)).ToList());
+            SecondPlayerCards = new ObservableCollection<CardViewModel>(engine.Players[1].Hand.Cards.Select(card => new CardViewModel(card, 1, engine)).ToList());
+            ThirdPlayerCards = new ObservableCollection<CardViewModel>(engine.Players[2].Hand.Cards.Select(card => new CardViewModel(card, 2, engine)).ToList());
+            FourthPlayerCards = new ObservableCollection<CardViewModel>(engine.Players[3].Hand.Cards.Select(card => new CardViewModel(card, 3, engine)).ToList());
+
             FirstPlayerReady = false;
             SecondPlayerReady = false;
             ThirdPlayerReady = false;
@@ -94,51 +85,105 @@ namespace MegaCorps.ViewModel
         public RelayCommand FirstPlayerReadyCommand => firstPlayerReadyCommand ?? (
             firstPlayerReadyCommand = new RelayCommand(obj =>
             {
-                FirstPlayerReady = true;
-                if (FirstPlayerReady && SecondPlayerReady && ThirdPlayerReady && FourthPlayerReady)
+                if (ValidateReady(0))
                 {
-                    engine.Turn();
-                    engine.Deal(3);
-                    RefreshCards();
+                    FirstPlayerReady = true;
+                    if (AllPlayersReady())
+                    {
+                        MakeTurn();
+                    }
+                }
+                else
+                {
+                    FirstPlayerReady = false;
                 }
             }));
+
 
         private RelayCommand secondPlayerReadyCommand;
         public RelayCommand SecondPlayerReadyCommand => secondPlayerReadyCommand ?? (
             secondPlayerReadyCommand = new RelayCommand(obj =>
             {
-                SecondPlayerReady = true;
-                if (FirstPlayerReady && SecondPlayerReady && ThirdPlayerReady && FourthPlayerReady)
+                if (ValidateReady(1))
                 {
-                    engine.Turn();
-                    engine.Deal(3);
-                    RefreshCards();
+                    SecondPlayerReady = true;
+                    if (AllPlayersReady())
+                    {
+                        MakeTurn();
+                    }
+                }
+                else
+                {
+                    SecondPlayerReady = false;
                 }
             }));
+
+        
+
         private RelayCommand thirdPlayerReadyCommand;
         public RelayCommand ThirdPlayerReadyCommand => thirdPlayerReadyCommand ?? (
             thirdPlayerReadyCommand = new RelayCommand(obj =>
             {
-                ThirdPlayerReady = true;
-                if (FirstPlayerReady && SecondPlayerReady && ThirdPlayerReady && FourthPlayerReady)
+                if (ValidateReady(2))
                 {
-                    engine.Turn();
-                    engine.Deal(3);
-                    RefreshCards();
+                    ThirdPlayerReady = true;
+                    if (AllPlayersReady())
+                    {
+                        MakeTurn();
+                    }
+                }
+                else
+                {
+                    ThirdPlayerReady = false;
                 }
             }));
         private RelayCommand fourthPlayerReadyCommand;
         public RelayCommand FourthPlayerReadyCommand => fourthPlayerReadyCommand ?? (
             fourthPlayerReadyCommand = new RelayCommand(obj =>
             {
-                FourthPlayerReady = true;
-                if (FirstPlayerReady && SecondPlayerReady && ThirdPlayerReady && FourthPlayerReady)
+                if (ValidateReady(3))
                 {
-                    engine.Turn();
-                    engine.Deal(3);
-                    RefreshCards();
+                    FourthPlayerReady = true;
+                    if (AllPlayersReady())
+                    {
+                        MakeTurn();
+                    }
+                }
+                else
+                {
+                    FourthPlayerReady = false;
                 }
             }));
 
+        private void MakeTurn()
+        {
+            engine.Turn();
+            engine.Deal(3);
+            RefreshCards();
+            RefreshScores();
+            if (engine.Win)
+            {
+                if(MessageBox.Show($"Победил игрок {engine.Winner}. Начать игру заново?") == MessageBoxResult.OK)
+                    RefreshGame();
+            }
+        }
+
+        private void RefreshGame()
+        {
+            engine = new GameEngine();
+            engine.Deal(6);
+            RefreshScores();
+            RefreshCards();
+        }
+
+        private bool AllPlayersReady()
+        {
+            return FirstPlayerReady && SecondPlayerReady && ThirdPlayerReady && FourthPlayerReady;
+        }
+
+        public bool ValidateReady(int playerPosition)
+        {
+            return engine.Players[playerPosition].Hand.Cards.Count(card => card.State == CardState.Used) == 3;
+        }
     }
 }
