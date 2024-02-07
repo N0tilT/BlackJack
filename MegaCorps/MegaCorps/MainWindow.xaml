@@ -35,6 +35,16 @@
                 Grid.Row="0"
                 Content="Игрок1:"
                 FontSize="40" />
+            <Image Source="Resources/Arrow.png" Margin="42,74,47,48" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="180"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
             <Label
                 Grid.Row="1"
                 Content="{Binding FirstPlayerScore}"
@@ -91,6 +101,16 @@
                 Grid.Row="0"
                 Content="Игрок2:"
                 FontSize="40" />
+            <Image Source="Resources/Arrow.png" Margin="42,74,47,48" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="270"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
             <Label
                 Grid.Row="1"
                 Content="{Binding SecondPlayerScore}"
@@ -146,6 +166,16 @@
                 Grid.Row="0"
                 Content="Игрок3:"
                 FontSize="40" />
+            <Image Source="Resources/Arrow.png" Margin="42,74,47,48" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="360"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
             <Label
                 Grid.Row="1"
                 Content="{Binding ThirdPlayerScore}"
@@ -201,6 +231,16 @@
                 Grid.Row="0"
                 Content="Игрок4:"
                 FontSize="40" />
+            <Image Source="Resources/Arrow.png" Margin="42,74,47,48" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="90"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
             <Label
                 Grid.Row="1"
                 Content="{Binding FourthPlayerScore}"
