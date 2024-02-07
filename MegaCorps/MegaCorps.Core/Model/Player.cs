@@ -22,9 +22,12 @@ namespace MegaCorps.Core.Model
 
         public void PlayHand()
         {
-            Score += Hand.Cards.Where((card) => card.Color == "Green" && card.State == CardState.Used).Count() - _targeted.Count();
+            int defenceCards = Hand.Cards.Where((card) => card.Color == "Green" && card.State == CardState.Used).Count();
+            if (_targeted.Count > defenceCards)
+            {
+                Score += defenceCards - _targeted.Count();
+            }
             Score += Hand.Cards.Where((card) => card.Color == "Yellow" && card.State == CardState.Used).Count();
-            
         }
     }
 
@@ -34,11 +37,12 @@ namespace MegaCorps.Core.Model
 
         public List<GameCard> Cards { get => _cards; set => _cards = value; }
 
+        public PlayerHand() { Cards = new List<GameCard>(); }
+
         public PlayerHand(List<GameCard> cards)
         {
             this._cards = cards;
         }
 
-        public PlayerHand() { Cards = new List<GameCard>(); }
     }
 }
