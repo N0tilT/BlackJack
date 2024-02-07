@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace MegaCorps.ViewModel
 {
@@ -41,15 +42,27 @@ namespace MegaCorps.ViewModel
         private bool _thirdPlayerReady;
         private bool _fourthPlayerReady;
 
-        public bool FirstPlayerReady { get => _firstPlayerReady; set => _firstPlayerReady = value; }
-        public bool SecondPlayerReady { get => _secondPlayerReady; set => _secondPlayerReady = value; }
-        public bool ThirdPlayerReady { get => _thirdPlayerReady; set => _thirdPlayerReady = value; }
-        public bool FourthPlayerReady { get => _fourthPlayerReady; set => _fourthPlayerReady = value; }
+        public bool FirstPlayerReady { get => _firstPlayerReady; set { _firstPlayerReady = value; OnPropertyChanged("FirstPlayerReady"); } }
+        public bool SecondPlayerReady
+        {
+            get => _secondPlayerReady; set { _secondPlayerReady = value; OnPropertyChanged("SecondPlayerReady"); }
+        }
+        public bool ThirdPlayerReady { get => _thirdPlayerReady; set { _thirdPlayerReady = value; OnPropertyChanged("ThirdPlayerReady"); } }
+        public bool FourthPlayerReady { get => _fourthPlayerReady; set { _fourthPlayerReady = value; OnPropertyChanged("FourthPlayerReady"); } }
 
         private GameEngine engine;
 
         private int _deckCounter;
         public int DeckCounter { get => _deckCounter; set { _deckCounter = value; OnPropertyChanged("DeckCounter"); } }
+
+        private SolidColorBrush _firstPlayerReadyBrush;
+        private SolidColorBrush _secondPlayerReadyBrush;
+        private SolidColorBrush _thirdPlayerReadyBrush;
+        private SolidColorBrush _fourthPlayerReadyBrush;
+        public SolidColorBrush FirstPlayerReadyBrush { get => _firstPlayerReadyBrush; set { _firstPlayerReadyBrush = value;OnPropertyChanged("FirstPlayerReadyBrush"); } }
+        public SolidColorBrush SecondPlayerReadyBrush { get => _secondPlayerReadyBrush; set { _secondPlayerReadyBrush = value; OnPropertyChanged("SecondPlayerReadyBrush"); } }
+        public SolidColorBrush ThirdPlayerReadyBrush { get => _thirdPlayerReadyBrush; set { _thirdPlayerReadyBrush = value; OnPropertyChanged("ThirdPlayerReadyBrush"); } }
+        public SolidColorBrush FourthPlayerReadyBrush { get => _fourthPlayerReadyBrush; set { _fourthPlayerReadyBrush = value; OnPropertyChanged("FourthPlayerReadyBrush"); } }
 
         public MainViewModel()
         {
@@ -75,10 +88,14 @@ namespace MegaCorps.ViewModel
             ThirdPlayerCards = new ObservableCollection<CardViewModel>(engine.Players[2].Hand.Cards.Select(card => new CardViewModel(card, 2, engine)).ToList());
             FourthPlayerCards = new ObservableCollection<CardViewModel>(engine.Players[3].Hand.Cards.Select(card => new CardViewModel(card, 3, engine)).ToList());
 
-            FirstPlayerReady = false;
+            FirstPlayerReady = false; 
+            FirstPlayerReadyBrush = Brushes.Transparent;
             SecondPlayerReady = false;
+            SecondPlayerReadyBrush = Brushes.Transparent;
             ThirdPlayerReady = false;
+            ThirdPlayerReadyBrush = Brushes.Transparent;
             FourthPlayerReady = false;
+            FourthPlayerReadyBrush = Brushes.Transparent;
         }
 
         private RelayCommand firstPlayerReadyCommand;
@@ -87,7 +104,8 @@ namespace MegaCorps.ViewModel
             {
                 if (ValidateReady(0))
                 {
-                    FirstPlayerReady = true;
+                    FirstPlayerReady = !FirstPlayerReady;
+                    FirstPlayerReadyBrush = FirstPlayerReady ? new SolidColorBrush(Color.FromRgb(54, 180, 69)) : Brushes.Transparent;
                     if (AllPlayersReady())
                     {
                         MakeTurn();
@@ -95,6 +113,7 @@ namespace MegaCorps.ViewModel
                 }
                 else
                 {
+                    FirstPlayerReadyBrush = Brushes.Transparent;
                     FirstPlayerReady = false;
                 }
             }));
@@ -106,7 +125,8 @@ namespace MegaCorps.ViewModel
             {
                 if (ValidateReady(1))
                 {
-                    SecondPlayerReady = true;
+                    SecondPlayerReady = !SecondPlayerReady;
+                    SecondPlayerReadyBrush = SecondPlayerReady ? new SolidColorBrush(Color.FromRgb(54, 180, 69)) : Brushes.Transparent;
                     if (AllPlayersReady())
                     {
                         MakeTurn();
@@ -114,11 +134,12 @@ namespace MegaCorps.ViewModel
                 }
                 else
                 {
+                    SecondPlayerReadyBrush = Brushes.Transparent;
                     SecondPlayerReady = false;
                 }
             }));
 
-        
+
 
         private RelayCommand thirdPlayerReadyCommand;
         public RelayCommand ThirdPlayerReadyCommand => thirdPlayerReadyCommand ?? (
@@ -126,7 +147,8 @@ namespace MegaCorps.ViewModel
             {
                 if (ValidateReady(2))
                 {
-                    ThirdPlayerReady = true;
+                    ThirdPlayerReady = !ThirdPlayerReady;
+                    ThirdPlayerReadyBrush = ThirdPlayerReady ? new SolidColorBrush(Color.FromRgb(54, 180, 69)) : Brushes.Transparent;
                     if (AllPlayersReady())
                     {
                         MakeTurn();
@@ -134,6 +156,7 @@ namespace MegaCorps.ViewModel
                 }
                 else
                 {
+                    ThirdPlayerReadyBrush = Brushes.Transparent;
                     ThirdPlayerReady = false;
                 }
             }));
@@ -143,7 +166,8 @@ namespace MegaCorps.ViewModel
             {
                 if (ValidateReady(3))
                 {
-                    FourthPlayerReady = true;
+                    FourthPlayerReady = !FourthPlayerReady;
+                    FourthPlayerReadyBrush = FourthPlayerReady? new SolidColorBrush(Color.FromRgb(54, 180, 69)) : Brushes.Transparent;
                     if (AllPlayersReady())
                     {
                         MakeTurn();
@@ -151,9 +175,11 @@ namespace MegaCorps.ViewModel
                 }
                 else
                 {
+                    FourthPlayerReadyBrush = Brushes.Transparent;
                     FourthPlayerReady = false;
                 }
             }));
+
 
         private void MakeTurn()
         {
@@ -163,7 +189,7 @@ namespace MegaCorps.ViewModel
             RefreshScores();
             if (engine.Win)
             {
-                if(MessageBox.Show($"Победил игрок {engine.Winner}. Начать игру заново?") == MessageBoxResult.OK)
+                if (MessageBox.Show($"Победил игрок {engine.Winner}. Начать игру заново?") == MessageBoxResult.OK)
                     RefreshGame();
             }
         }
@@ -176,7 +202,7 @@ namespace MegaCorps.ViewModel
             RefreshCards();
         }
 
-        private bool AllPlayersReady()
+        public bool AllPlayersReady()
         {
             return FirstPlayerReady && SecondPlayerReady && ThirdPlayerReady && FourthPlayerReady;
         }

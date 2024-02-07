@@ -16,9 +16,9 @@ namespace MegaCorps.Core.Model
         public Deck Deck { get => _deck; set => _deck = value; }
         public List<Player> Players { get => _players; set => _players = value; }
         public bool Win { get => _win; set => _win = value; }
-        public Player Winner { get => _winner; set => _winner = value; }
+        public int Winner { get => _winner; set => _winner = value; }
 
-        private Player _winner;
+        private int _winner;
 
         private bool _win;
 
@@ -54,10 +54,11 @@ namespace MegaCorps.Core.Model
                 Deck.PlayedCards.AddRange(Players[i].Hand.Cards.Where((card) => card.State == CardState.Used));
                 Players[i].Hand.Cards.RemoveAll((card) => card.State == CardState.Used);
                 Players[i].Targeted.Clear();
+                Players[i].Selected.Clear();
             }
 
             Win = Players.Any(player => player.Score >= 10);
-            Winner = Players.Find(player => player.Score == Players.Max((item) => item.Score));
+            Winner = Players.FindIndex(player => player.Score == Players.Max((item) => item.Score))+1;
 
         }
 

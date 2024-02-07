@@ -2,6 +2,7 @@
     x:Class="MegaCorps.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:MegaCorps.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:MegaCorps"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -9,7 +10,9 @@
     MinWidth="800"
     MinHeight="800"
     mc:Ignorable="d">
-
+    <Window.Resources>
+        <converters:BoolToOppositeBoolConverter x:Key="oppositeConverter" />
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="150" />
@@ -39,11 +42,11 @@
         </Grid>
         <Grid Grid.Row="2" Grid.Column="1">
             <Border
-                x:Name="FirstPlayerCardContainerBorder"
                 Background="#b5aebf"
+                BorderBrush="{Binding FirstPlayerReadyBrush}"
                 BorderThickness="3"
                 CornerRadius="6">
-                <ItemsControl x:Name="FirstPlayerCardContainer" ItemsSource="{Binding FirstPlayerCards}">
+                <ItemsControl IsEnabled="{Binding FirstPlayerReady, Converter={StaticResource oppositeConverter}}" ItemsSource="{Binding FirstPlayerCards}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Columns="6" />
@@ -95,11 +98,11 @@
         </Grid>
         <Grid Grid.Row="1" Grid.Column="0">
             <Border
-                x:Name="SecondPlayerCardContainerBorder"
                 Background="#b5aebf"
+                BorderBrush="{Binding SecondPlayerReadyBrush}"
                 BorderThickness="3"
                 CornerRadius="6">
-                <ItemsControl x:Name="SecondPlayerCardContainer" ItemsSource="{Binding SecondPlayerCards}">
+                <ItemsControl IsEnabled="{Binding SecondPlayerReady, Converter={StaticResource oppositeConverter}}" ItemsSource="{Binding SecondPlayerCards}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Rows="6" />
@@ -150,11 +153,11 @@
         </Grid>
         <Grid Grid.Row="0" Grid.Column="1">
             <Border
-                x:Name="ThirdPlayerCardContainerBorder"
                 Background="#b5aebf"
+                BorderBrush="{Binding ThirdPlayerReadyBrush}"
                 BorderThickness="3"
                 CornerRadius="6">
-                <ItemsControl x:Name="ThirdPlayerCardContainer" ItemsSource="{Binding ThirdPlayerCards}">
+                <ItemsControl IsEnabled="{Binding ThirdPlayerReady, Converter={StaticResource oppositeConverter}}" ItemsSource="{Binding ThirdPlayerCards}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Columns="6" />
@@ -205,11 +208,11 @@
         </Grid>
         <Grid Grid.Row="1" Grid.Column="2">
             <Border
-                x:Name="FourthPlayerCardContainerBorder"
                 Background="#b5aebf"
+                BorderBrush="{Binding FourthPlayerReadyBrush}"
                 BorderThickness="3"
                 CornerRadius="6">
-                <ItemsControl x:Name="FourthPlayerCardContainer" ItemsSource="{Binding FourthPlayerCards}">
+                <ItemsControl IsEnabled="{Binding FourthPlayerReady, Converter={StaticResource oppositeConverter}}" ItemsSource="{Binding FourthPlayerCards}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Rows="6" />
@@ -280,7 +283,6 @@
                 Width="70"
                 Height="40"
                 Background="Green"
-                Click="FirstPlayerReady_Click"
                 Command="{Binding FirstPlayerReadyCommand}"
                 Content="Готов" />
             <Button
@@ -289,7 +291,6 @@
                 Width="40"
                 Height="70"
                 Background="Green"
-                Click="SecondPlayerReady_Click"
                 Command="{Binding SecondPlayerReadyCommand}"
                 Content="Готов" />
             <Button
@@ -298,7 +299,6 @@
                 Width="70"
                 Height="40"
                 Background="Green"
-                Click="ThirdPlayerReady_Click"
                 Command="{Binding ThirdPlayerReadyCommand}"
                 Content="Готов" />
             <Button
@@ -307,7 +307,6 @@
                 Width="40"
                 Height="70"
                 Background="Green"
-                Click="FourthPlayerReady_Click"
                 Command="{Binding FourthPlayerReadyCommand}"
                 Content="Готов" />
         </Grid>

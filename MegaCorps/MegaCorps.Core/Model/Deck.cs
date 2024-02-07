@@ -41,7 +41,7 @@ namespace MegaCorps.Core.Model
                 {
                     card.State = Enums.CardState.Unused;
                 }
-                UnplayedCards = new List<GameCard>();
+                UnplayedCards = new List<GameCard>(PlayedCards);
                 PlayedCards = new List<GameCard>();
             }
             Random random = new Random();
