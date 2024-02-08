@@ -22,12 +22,7 @@ namespace MegaCorps.Core.Model
 
         public void PlayHand()
         {
-            int defenceCards = Hand.Cards.Where((card) => card.Color == "Green" && card.State == CardState.Used).Count();
-            if (_targeted.Count > defenceCards)
-            {
-                Score += defenceCards - _targeted.Count();
-            }
-            Score += Hand.Cards.Where((card) => card.Color == "Yellow" && card.State == CardState.Used).Count();
+            //
         }
     }
 

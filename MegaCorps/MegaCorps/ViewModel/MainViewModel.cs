@@ -183,7 +183,7 @@ namespace MegaCorps.ViewModel
 
         private void MakeTurn()
         {
-            engine.Turn();
+            engine.FindWinner();
             engine.Deal(3);
             RefreshCards();
             RefreshScores();

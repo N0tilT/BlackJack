@@ -15,7 +15,7 @@ namespace MegaCorps.Core.Model
         public List<GameCard> PlayedCards { get => playedCards; set => playedCards = value; }
         public List<GameCard> UnplayedCards { get => unplayedCards; set => unplayedCards = value; }
 
-        public Deck(List<GameCard> cards) 
+        public Deck(List<GameCard> cards)
         {
             UnplayedCards = cards;
             PlayedCards = new List<GameCard>();
@@ -33,30 +33,31 @@ namespace MegaCorps.Core.Model
             }
         }
 
-        public List<List<GameCard>> Deal(int dealCount, int playersCount)
+        public List<List<GameCard>> Deal(int dealCount, int playersCount, List<int> playersToDeal)
         {
-            if(UnplayedCards.Count <= dealCount * playersCount)
+            if (UnplayedCards.Count <= dealCount * playersCount)
             {
-                foreach (GameCard card in PlayedCards)
-                {
-                    card.State = Enums.CardState.Unused;
-                }
                 UnplayedCards = new List<GameCard>(PlayedCards);
                 PlayedCards = new List<GameCard>();
             }
             Random random = new Random();
-            List<List<GameCard>> hands = Enumerable.Range(0, playersCount).Select(i => new List<GameCard>()).ToList();
+            List<List<GameCard>> hands =
+                Enumerable.Range(0, playersCount).Select(i => new List<GameCard>()).ToList();
 
             int counter = 0;
-            while (counter < dealCount*playersCount)
+            while (counter < dealCount * playersCount)
             {
-                foreach (var player in hands)
+                for (int i = 0; i < hands.Count; i++)
                 {
-                    player.Add(UnplayedCards[UnplayedCards.Count - 1]);
-                    UnplayedCards.RemoveAt(UnplayedCards.Count - 1);
-                    if (UnplayedCards.Count == 0)
-                        break;
-                    counter++;
+                    List<GameCard> player = hands[i];
+                    if (playersToDeal.Contains(i))
+                    {
+                        player.Add(UnplayedCards[UnplayedCards.Count - 1]);
+                        UnplayedCards.RemoveAt(UnplayedCards.Count - 1);
+                        if (UnplayedCards.Count == 0)
+                            break;
+                        counter++;
+                    }
                 }
             }
             return hands;

@@ -10,15 +10,11 @@ namespace MegaCorps.Core.Model.Cards
     public class GameCard
     {
         public int Id { get; set; }
-        public CardState State { get; set; }
-        public int UserId { get; set; }
-
-        public string Color { get; set; }
-        public GameCard(int id)
+        public int Value { get; set; }
+        public GameCard(int id, int value)
         {
-            Id=id;
-            UserId=-1;
-            State= CardState.Unused;
+            Id = id;
+            Value = value;
         }
 
     }

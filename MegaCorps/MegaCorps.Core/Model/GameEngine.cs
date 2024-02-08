@@ -28,13 +28,13 @@ namespace MegaCorps.Core.Model
         {
             Deck = DeckBuilder.GetDeck();
             Deck.Shuffle();
-            Players = new List<Player> { new Player(), new Player(), new Player(), new Player() };
+            Players = new List<Player> { new Player(), new Player() };
             _win = false;
         }
 
-        public void Deal(int dealCount)
+        public void Deal(int dealCount, List<int> playersToDeal)
         {
-            List<List<GameCard>> hands = Deck.Deal(dealCount, 4);
+            List<List<GameCard>> hands = Deck.Deal(dealCount, 2, playersToDeal);
 
             for (int i = 0; i < Players.Count; i++)
             {
@@ -42,35 +42,14 @@ namespace MegaCorps.Core.Model
             }
         }
 
-        public void Turn()
+        public void FindWinner()
         {
-            for (int i = 0; i < Players.Count; i++)
-            {
-                Players[i].Targeted = Players[i == 0 ? Players.Count() - 1 : i - 1].Hand.Cards.Where((card) => card.State == CardState.Used && card.Color == "Red").ToList();
-                Players[i].PlayHand();
-            }
-            for (int i = 0; i < Players.Count; i++)
-            {
-                Deck.PlayedCards.AddRange(Players[i].Hand.Cards.Where((card) => card.State == CardState.Used));
-                Players[i].Hand.Cards.RemoveAll((card) => card.State == CardState.Used);
-                Players[i].Targeted.Clear();
-                Players[i].Selected.Clear();
-            }
+                //Самим
 
-            Win = Players.Any(player => player.Score >= 10);
+            Win = Players.Any(player => player.Score <= 21);
             Winner = Players.FindIndex(player => player.Score == Players.Max((item) => item.Score))+1;
 
         }
 
-        public bool ValidateSelection(GameCard card,int playerPosition)
-        {
-            Players[playerPosition].Selected.Enqueue(card);
-            if (Players[playerPosition].Selected.Count > 3)
-            {
-                Players[playerPosition].Selected.Dequeue();
-                return false;
-            }
-            return true;
-        }
     }
 }
